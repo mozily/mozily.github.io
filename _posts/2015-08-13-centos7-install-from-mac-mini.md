@@ -25,6 +25,8 @@ mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본
 주위에서는 비싸게 맥미니를 사서 뭐하는 거냐 라고 하지만 그 어떤 서버보다 조용 했고, 전기를 적게 먹었으며 안정적 이었다.
 2020년 10월 기준 8년간 사용 했으며 uptime 최고 기록은 1년 6개월 정도 였던것 같다.
 
+---
+
 ### CentOS 7.x 설치용 USB 준비
 
 **설치할 centos 의 이미지 (iso) 를 준비 한다.**
@@ -81,6 +83,8 @@ diskutil unmountDisk /dev/disk2
 # 완료 되면 "삽입한 디스크를 컴퓨터에서 읽을수 없어요" 라는 에러 팝업이 뜸 (정상이니 당황 노노)
 sudo dd if=centos7.x.xxx.dmg of=/dev/disk2 bs=1m
 ```
+
+---
 
 ### mac mini 에 centos 설치
 
@@ -177,6 +181,8 @@ vi /etc/sudoers
 yum install -y net-tools telnet wget git
 yum groupinstall -y 'Development Tools'
 ```
+
+---
 
 ### mac mini fan 동작 이슈
 
