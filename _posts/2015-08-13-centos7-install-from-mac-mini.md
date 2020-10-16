@@ -10,10 +10,8 @@ tags: [linux, centos, mac-mini]
 <img src='https://drive.google.com/uc?export=download&id=1iBsFoV-oI20eyg4ce6IFqu_drBmgTbE_' alt='mac mini server 2012 late'>
 
 2012년 가을쯤 mac mini server 2012 late 버전을 구입 했다.
-> i7-3세대, 2.3GHz, 쿼드코어
->
-> RAM 8GB (기본 4GB 에서 추가)
->
+> i7-3세대, 2.3GHz, 쿼드코어<br>
+> RAM 8GB (기본 4GB 에서 추가)<br>
 > SSD 2TB (1TB X 2)
 
 mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본 제공 된다.
@@ -39,24 +37,18 @@ mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본
 
 
 <font color='red'>centos 7.6.1810 minimal 버전 설치 불가</font>
-> 2019년 7월 기준 버그로 인해 설치용 USB 를 만들경우 에러가 발생함
->
+> 2019년 7월 기준 버그로 인해 설치용 USB 를 만들경우 에러가 발생함<br>
 > https://angrysysadmins.tech/index.php/2018/12/grassyloki/centos-7-failed-set-moklistrt/
 
 <font color='blue'>centos 7.8.2003 minimal 설치 가능</font>
 
 <font color='red'>centos 8.2.2004 minimal 버전 설치 불가</font>
-> 2020년 9월 30일 기준 centos 8 버전 중에서 가장 최신 버전
->
-> 설치 usb는 만들어 졌지만, 설치 과정에서 disk 파티션 설정 중 에러가 발생 함
->
-> /boot/efi 파티션을 만들 수 없는 에러 ..
->
-> rescue mode 로 들어가서 fdisk 로 파티션을 모두 날리고 설치 해봤지만 정상적으로 설치되지 않았음
->
-> > boot disk 를 지정하지 않으면 설치가 가능하짐나 부팅시 정상적으로 centos 를 부팅 하지 못함
-> >
-> > boot disk 를 지정하면 /boot/efi 파디션을 만들다가 에러가 발생 함
+> 2020년 9월 30일 기준 centos 8 버전 중에서 가장 최신 버전<br>
+> 설치 usb는 만들어 졌지만, 설치 과정에서 disk 파티션 설정 중 에러가 발생 함<br>
+> /boot/efi 파티션을 만들 수 없는 에러..<br>
+> rescue mode 로 들어가서 fdisk 로 파티션을 모두 날리고 설치 해봤지만 정상적으로 설치되지 않았음<br>
+>> boot disk 를 지정하지 않으면 설치가 가능하짐나 부팅시 정상적으로 centos 를 부팅 하지 못함<br>
+>> boot disk 를 지정하면 /boot/efi 파디션을 만들다가 에러가 발생 함
 
 **설치용 centos usb 제작**
 
@@ -128,6 +120,7 @@ sudo dd if=centos7.x.xxx.dmg of=/dev/disk2 bs=1m
 selinux 보안설정 off
 
 > 보안상 키는게 좋을것 같지만 제약이 많아져서 끄는 편
+
 ```bash
 su -c "setenforce 0"
 vi /etc/sysconfig/selinux
@@ -138,8 +131,7 @@ SELINUX=disabled
 
 dns 설정
 
-> [dnsever.com](https://kr.dnsever.com) : 적은 비용으로 dns 를 사용할수 있다.
->
+> [dnsever.com](https://kr.dnsever.com) : 적은 비용으로 dns 를 사용할수 있다.<br>
 > 일정 주기로 dnsever 로 서버의 도메인 주소를 날리면 dnsever 에서 알아서 dns 를 갱신 해준다.
 
 ```bash
