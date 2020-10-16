@@ -43,7 +43,7 @@ mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본
 > 2020년 9월 30일 기준 centos 8 버전 중에서 가장 최신 버전<br>
 > 설치 usb는 만들어 졌지만, 설치 과정에서 disk 파티션 설정 중 에러가 발생 함<br>
 > /boot/efi 파티션을 만들 수 없는 에러..<br>
-> rescue mode 로 들어가서 fdisk 로 파티션을 모두 날리고 설치 해봤지만 정상적으로 설치되지 않았음<br>
+> rescue mode 로 들어가서 fdisk 로 파티션을 모두 날리고 설치 해봤지만 정상적으로 설치되지 않았음
 >> boot disk 를 지정하지 않으면 설치가 가능하짐나 부팅시 정상적으로 centos 를 부팅 하지 못함<br>
 >> boot disk 를 지정하면 /boot/efi 파디션을 만들다가 에러가 발생 함
 
