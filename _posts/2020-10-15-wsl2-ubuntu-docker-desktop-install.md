@@ -40,8 +40,8 @@ WSL 2에 커널 구성 요소 업데이트가 필요합니다. 자세한 내용�
   
 <img src='https://drive.google.com/uc?export=download&id=1V1MOFgoSdGHHoXg5IaeqQ3j0Rg2kZnDq' alt='ubuntu 20.04 lts'>  
   
-> 윈도우키 > microsoft store 클릭 > ubuntu 검색 > ubuntu 20.04 lts 클릭후 설치  
-> ubuntu 를 실행하고 최초 계정, 패스워드를 입력하면 완료  
+> 윈도우키 > microsoft store 클릭 > ubuntu 검색 > ubuntu 20.04 lts 클릭후 설치
+> ubuntu 를 실행하고 최초 계정, 패스워드를 입력하면 완료
  
 ### docker desktop for windows 설치  
  
