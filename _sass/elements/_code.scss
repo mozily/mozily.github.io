@@ -1,0 +1,27 @@
+/*------------------------------------*\
+  Elements > code & pre
+\*------------------------------------*/
+
+pre,
+code {
+  font-family: $font-monospace;
+  background-color: $bg-color-gray;
+}
+
+div.highlight{
+  display:grid;
+  margin-bottom: $base-spacing-unit;
+}
+
+pre.highlight {
+  overflow-x: auto;
+  padding: double($base-spacing-unit);
+  font-size: $font-size-medium;
+  line-height: $line-height-medium;
+  white-space: pre;
+  width:auto;
+  // box-sizing: border-box !important;
+}
+
+li code,
+p code { padding: quarter($base-spacing-unit) half($base-spacing-unit); }
