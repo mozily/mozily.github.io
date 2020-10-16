@@ -286,7 +286,7 @@ if __name__ == "__main__":
 		sys.exit(0)
 	else:
 	    print "usage: %s start|stop|restart" % sys.argv[0]
-		sys.exit(2)
+	    sys.exit(2)
 ```
 
 작성한 스크립트를 service 로 추가 및 실행
