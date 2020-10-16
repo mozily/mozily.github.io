@@ -1,11 +1,11 @@
 ---
 layout: post  
 comments: true  
-title: windows 10 2004 환경에 WSL2, Docker Desktop 설치  
+title: windows 10 에 WSL2, Ubuntu, Docker 설치  
 tags: [linux, wsl2, docker]  
 ---
   
-### 윈도우 버전 확인  
+### 윈도우 버전 확인
   
 <img src='https://drive.google.com/uc?export=download&id=182NzrhGFSpTJERth6nkkyrhgqmf66qa6' alt='윈도우 사양'>  
   
