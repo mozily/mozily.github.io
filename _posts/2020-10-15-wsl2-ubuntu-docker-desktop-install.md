@@ -61,8 +61,8 @@ Docker Desktop 설정
 
 ubuntu 실행
 
-'''bash  
+```bash
 docker version
-'''
+```
  
 docker 정보가 제대로 출력 되는지 체크
