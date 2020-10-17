@@ -59,6 +59,10 @@ Docker Desktop 설정
 
 <img src='https://drive.google.com/uc?export=download&id=1ecFUa8kb-ZZI6qBKPJVdGxcPCsDFVxIy' alt='docker settings resources'>
 
-> ubuntu 실행  
-> docker version 입력  
-> docker 정보가 제대로 출력 되는지 체크
+ubuntu 실행
+
+'''bash  
+docker version
+'''
+ 
+docker 정보가 제대로 출력 되는지 체크
