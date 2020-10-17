@@ -10,9 +10,9 @@ tags: [linux, centos, mac-mini]
 <img src='https://drive.google.com/uc?export=download&id=1iBsFoV-oI20eyg4ce6IFqu_drBmgTbE_' alt='mac mini server 2012 late'>
 
 2012년 가을쯤 mac mini server 2012 late 버전을 구입 했다.
-> i7-3세대, 2.3GHz, 쿼드코어<br>
-> RAM 8GB (기본 4GB 에서 추가)<br>
-> SSD 2TB (1TB X 2)
+> i7-3세대, 2.3GHz, 쿼드코어  
+> RAM 8GB (기본 4GB 에서 추가)  
+> SSD 2TB (1TB X 2)  
 
 mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본 제공 된다.
 생각 보다 별거 없는 구성이라 살짝 허탈 하기도 했다.
@@ -33,19 +33,19 @@ mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본
 
 평소 가벼운걸 선호 하기 때문에 minimal.iso 파일을 다운 받았다.
 
-<font color='blue'>centos 7.5.1804 minimal 설치 가능</font><br>
-<font color='red'>centos 7.6.1810 minimal 버전 설치 불가</font>
-> 2019년 7월 기준 버그로 인해 설치용 USB 를 만들경우 에러가 발생함<br>
+<font color='blue'>centos 7.5.1804 minimal 설치 가능</font>  
+<font color='red'>centos 7.6.1810 minimal 버전 설치 불가</font>  
+> 2019년 7월 기준 버그로 인해 설치용 USB 를 만들경우 에러가 발생함  
 > https://angrysysadmins.tech/index.php/2018/12/grassyloki/centos-7-failed-set-moklistrt/
 
-<font color='blue'>centos 7.8.2003 minimal 설치 가능</font><br>
-<font color='red'>centos 8.2.2004 minimal 버전 설치 불가</font>
-> 2020년 9월 30일 기준 centos 8 버전 중에서 가장 최신 버전<br>
-> 설치 usb는 만들어 졌지만, 설치 과정에서 disk 파티션 설정 중 에러가 발생 함<br>
-> /boot/efi 파티션을 만들 수 없는 에러..<br>
-> rescue mode 로 들어가서 fdisk 로 파티션을 모두 날리고 설치 해봤지만 정상적으로 설치되지 않았음
->> boot disk 를 지정하지 않으면 설치가 가능하짐나 부팅시 정상적으로 centos 를 부팅 하지 못함<br>
->> boot disk 를 지정하면 /boot/efi 파디션을 만들다가 에러가 발생 함
+<font color='blue'>centos 7.8.2003 minimal 설치 가능</font>  
+<font color='red'>centos 8.2.2004 minimal 버전 설치 불가</font>  
+> 2020년 9월 30일 기준 centos 8 버전 중에서 가장 최신 버전  
+> 설치 usb는 만들어 졌지만, 설치 과정에서 disk 파티션 설정 중 에러가 발생 함  
+> /boot/efi 파티션을 만들 수 없는 에러..  
+> rescue mode 로 들어가서 fdisk 로 파티션을 모두 날리고 설치 해봤지만 정상적으로 설치되지 않았음  
+>> boot disk 를 지정하지 않으면 설치가 가능하짐나 부팅시 정상적으로 centos 를 부팅 하지 못함  
+>> boot disk 를 지정하면 /boot/efi 파디션을 만들다가 에러가 발생 함  
 
 **설치용 centos usb 제작**
 
@@ -56,7 +56,7 @@ usb 를 알맞은 형식으로 포멧
 - usb 에서 마우스 오른쪽  "지우기" 선택
 - Mac OS 확장 (저널링) 선택 후 지우기 실행
 
-터미널 실행
+터미널 실행  
 ```bash
 # hdiutil convert -format UDRW -o <생성될 dmg 파일 이름> <원본 iso 파일 경로와 이름>
 hdiutil convert -format UDRW -o centos7.x.xxxx.dmg ./CentOS-7.x.xxx.iso
@@ -77,25 +77,24 @@ sudo dd if=centos7.x.xxx.dmg of=/dev/disk2 bs=1m
 
 ### mac mini 에 centos 설치
 
-준비된 USB 를 서버에 꼽고 재부팅
-
-재부팅시 alt 키를 누르고 있으면 mac 의 부팅 관리자 메뉴가 뜨고, USB 를 선택
+준비된 USB 를 서버에 꼽고 재부팅  
+재부팅시 alt 키를 누르고 있으면 mac 의 부팅 관리자 메뉴가 뜨고, USB 를 선택  
 
 **centos 설치**
 
-언어 선택
-- 영어 /영어
+언어 선택  
+- 영어 /영어  
 
-소프트웨어 선택
-- minimal install
-- development tools
+소프트웨어 선택  
+- minimal install  
+- development tools  
 
-네트워크 & 호스트 옵션
-- on 으로 설정하고 host name 을 원하는 이름으로 설정
+네트워크 & 호스트 옵션  
+- on 으로 설정하고 host name 을 원하는 이름으로 설정  
 
-날짜 시간 옵션
-- Asia/Seoul 체크 후 network time on
-- 네트워크를 먼저 설정하지 않으면 network time on 으로 변경 할 수 없음
+날짜 시간 옵션  
+- Asia/Seoul 체크 후 network time on  
+- 네트워크를 먼저 설정하지 않으면 network time on 으로 변경 할 수 없음  
 
 파티션 옵션
 
@@ -116,7 +115,7 @@ sudo dd if=centos7.x.xxx.dmg of=/dev/disk2 bs=1m
 
 selinux 보안설정 off
 
-> 보안상 키는게 좋을것 같지만 제약이 많아져서 끄는 편
+> 보안상 키는게 좋을것 같지만 제약이 많아져서 끄는 편  
 
 ```bash
 su -c "setenforce 0"
@@ -128,8 +127,8 @@ SELINUX=disabled
 
 dns 설정
 
-> [dnsever.com](https://kr.dnsever.com) : 적은 비용으로 dns 를 사용할수 있다.<br>
-> 일정 주기로 dnsever 로 서버의 도메인 주소를 날리면 dnsever 에서 알아서 dns 를 갱신 해준다.
+> [dnsever.com](https://kr.dnsever.com) : 적은 비용으로 dns 를 사용할수 있다.  
+> 일정 주기로 dnsever 로 서버의 도메인 주소를 날리면 dnsever 에서 알아서 dns 를 갱신 해준다.  
 
 ```bash
 crontab -e
