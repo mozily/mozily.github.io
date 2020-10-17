@@ -7,17 +7,11 @@ tags: jekyll
 
 # github page 와 jekyll
 
-## github 는 소스코드 저장소 아닌가요?
-
-github 는 git 을 이용하는 개발자 간에 좀더 효율적으로 프로젝트를 관리하고  
-공유 할수 있도록 하는 플랫폼 의 역할을 수행 하는 곳 이다.    
-일반 사용자는 public repository 만 생성 할 수 있었으나  
-2018년 6월 4일 microsoft 의 인수 이후 일반 사용자도 private repository 를 생성 할 수 있게 됐다.  
-
-github page 는 github 에서 제공 하는 정적 페이지 호스팅 서비스 이다.  
-> html, jekyll 등을 지원 한다.  
-
 ## jekyll 가 뭔가요?
+
+[jekyll 공식 사이트](https://jekyllrb.com/)
+
+![](https://drive.google.com/uc?export=download&id=16VWOGHeUE1jRhcUwglKENLFHuITUngaD)
 
 ```
 .
@@ -45,7 +39,19 @@ github page 는 github 에서 제공 하는 정적 페이지 호스팅 서비스
 ```
 
 jekyll 는 구조화 되어 있는 프레임워크 위에 정해진 규칙에 의해 생성한 원복 텍스트 파일을 올리면  
-변화기를 통해 우리가 정적 사이트를 구성하기 위해 필요한 파일을 만들어 준다.  
+변환기를 통해 우리가 정적 사이트를 구성하기 위해 필요한 파일을 만들어 준다.  
+> 주로 원본 파일은 markdown 형식을 이용하고 있다.  
+
+## github 는 소스코드 저장소 아닌가요?
+
+github 는 git 을 이용하는 개발자 간에 좀더 효율적으로 프로젝트를 관리하고 공유 할수 있도록 플랫폼 역할을 수행 하는 곳 이다.  
+일반 사용자는 public repository 만 생성 할 수 있었으나 2018년 6월 4일 microsoft 의 인수 이후  
+일반 사용자도 private repository 를 생성 할 수 있게 됐다.  
+
+![](https://drive.google.com/uc?export=download&id=1UbGGIZQotOp1Pw8BgUCQOOBNlR0798Qj)
+
+github page 는 github 에서 제공 하는 정적 페이지 호스팅 서비스 이다.  
+> html, jekyll 등을 지원 한다.  
 
 github page 의 내부 엔진으로 사용하고 있지만 여러가지 보안상의 이유로 jekyll plugin 은 사용할수 없다.  
 만약 plugin 을 사용하고 싶다면 로컬 환경에 jekyll 를 세팅하고 plugin 을 설치 한후  
@@ -73,7 +79,7 @@ github 에서는 2020년 10월을 기점으로 default branch name 을 master �
 2020년 10월 17일 기준 아직 source 부분은 master 로 적용 돼 있기 때문에 정상적으로 페이지가 뜨지 않는다.  
 
 2가지 플랜이 있다.  
-1. github 정책에 따라 master 를 사용하지 않기로 하고, Source 부분의 branch 를 master -> main 으로 변경한다.  
+1. github 정책에 따라 master 를 사용하지 않고, branch 를 master -> main 으로 변경한다.  
 2. master branch 를 추가 하고 default branch 를 master 로 변경하고, main 을 삭제한다.  
 
 기본적으로 github.io 는 설정한 branch 에 push 가 되면 내부적인 build 과정을 거치고 페이지가 업로드 된다.  
