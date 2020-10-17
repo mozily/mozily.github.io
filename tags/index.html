@@ -4,9 +4,13 @@ title: Tags
 permalink: /tags/
 ---
 
-{% if site.posts.size != 0 %}
+{% if site.posts.size == 0 %}
 <h2>No post found</h2>
 {% endif %}
+
+{% for tag in site.tags %}
+<h3>{{tag}}</h3><br>
+{% endfor %}
 
 <div class="tags">
     <ul class="label">
