@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: github 에서 jekyll 를 이용해 blog 만들기 (초안)
+title: github 에서 jekyll 를 이용해 blog 만들기
 tags: [jekyll]
 ---
 
@@ -164,5 +164,4 @@ jekyll build --drafts
 
 기본적으로 github page 에서는 github page 의 source 로 설정된 branch 에 push 가 새롭게 되면  
 자동으로 build 를 하고 github.io 에 생성한 정적 페이지를 배포 한다.  
-
 push 하고 나서 약 1분 정도의 시간이 소요 될수 있으니 여유를 가지고 기다려 보자.  
