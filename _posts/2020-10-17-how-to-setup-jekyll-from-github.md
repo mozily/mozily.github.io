@@ -98,3 +98,19 @@ github page 는 일반적인 유저라면 쉽게 걸리지 않는 제약사항�
 
 ## 생성한 github.io 에 jekyll 테마 적용
 
+[jekyll theme 보러가기](https://github.com/topics/jekyll-theme)
+
+github topics 에서 jekyll-theme 태그를 검색하면 여러가지 적용 가능한 테마 정보가 올라와 있다.  
+
+![](https://drive.google.com/uc?export=download&id=1B7Z8LAI2Pgj37o5_wRWSwiDcCZi-wU1w)
+
+테마 repository 에 접속해서 demo 사이트나 스크린샷 이미지를 보며 사용할 테마를 결정한다.  
+테마 적용 방법은 크게 2가지로 나뉠수 있다.  
+1. _config.yml 파일만 복사해서 remote_theme 기능을 사용 하는 방법  
+2. 테마 repository 를 fork 해서 사용 하는 방법
+> 나는 기존 테마에서 다양한 커스터마이징을 하기 위해서 fork 해서 사용하는걸 추천 한다.
+
+### remote_theme 기능을 이용한 테마 적용
+
+### repository fork 를 이용한 테마 적용
+
