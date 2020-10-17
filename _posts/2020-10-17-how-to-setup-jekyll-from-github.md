@@ -45,8 +45,7 @@ jekyll 는 구조화 되어 있는 프레임워크 위에 정해진 규칙에 �
 ## github 는 소스코드 저장소 아닌가요?
 
 github 는 git 을 이용하는 개발자 간에 좀더 효율적으로 프로젝트를 관리하고 공유 할수 있도록 플랫폼 역할을 수행 하는 곳 이다.  
-일반 사용자는 public repository 만 생성 할 수 있었으나 2018년 6월 4일 microsoft 의 인수 이후  
-일반 사용자도 private repository 를 생성 할 수 있게 됐다.  
+일반 사용자는 public repository 만 생성 할 수 있었으나 2018년 6월 4일 microsoft 의 인수 이후 일반 사용자도 private repository 를 생성 할 수 있게 됐다.  
 
 ![](https://drive.google.com/uc?export=download&id=1UbGGIZQotOp1Pw8BgUCQOOBNlR0798Qj)
 
@@ -95,8 +94,7 @@ github page 는 일반적인 유저라면 쉽게 걸리지 않는 제약사항�
 3. github page 는 월 기준 100GB 의 트래픽을 넘길수 없다.  
 4. github page 는 1시간에 10번 까지만 build 할 수 있다.  
 
-위의 제약이 싫다면 github premium 을 쓰면 되지만  
-일반적인 블로그 운영이라면 제약사항을 초기하기 힘들것 같다.   
+위의 제약이 싫다면 github premium 을 쓰면 되지만 일반적인 블로그 운영이라면 제약사항을 초과하기는 힘들 것 같다.  
 
 ## 생성한 github.io 에 jekyll 테마 적용
 
