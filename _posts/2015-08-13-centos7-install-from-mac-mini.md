@@ -108,7 +108,7 @@ sudo dd if=centos7.x.xxx.dmg of=/dev/disk2 bs=1m
 |swap|16 GB (메모리의 2배)|standard partition|swap|
 |/|나머지|LVM|ext4|
 
-<font color='blue'>위의 설정은 주관적인 설정이며 본인의 취향대로 바꿔도 상관 없음</font>
+<font color='blue'>위의 설정은 주관적인 설정이며 본인의 취향대로 바꿔도 상관 없음</font><br>
 
 계정 패스워드 설정
 - 설치중 root password, user creation 적용
