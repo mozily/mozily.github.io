@@ -33,13 +33,13 @@ mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본
 
 평소 가벼운걸 선호 하기 때문에 minimal.iso 파일을 다운 받았다.
 
-<font color='blue'>centos 7.5.1804 minimal 설치 가능</font>  
+<font color='blue'>centos 7.5.1804 minimal 설치 가능</font><br>
 
 <font color='red'>centos 7.6.1810 minimal 버전 설치 불가</font>  
 > 2019년 7월 기준 버그로 인해 설치용 USB 를 만들경우 에러가 발생함  
 > https://angrysysadmins.tech/index.php/2018/12/grassyloki/centos-7-failed-set-moklistrt/
 
-<font color='blue'>centos 7.8.2003 minimal 설치 가능</font>  
+<font color='blue'>centos 7.8.2003 minimal 설치 가능</font><br>
   
 <font color='red'>centos 8.2.2004 minimal 버전 설치 불가</font>  
 > 2020년 9월 30일 기준 centos 8 버전 중에서 가장 최신 버전  
