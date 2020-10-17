@@ -16,6 +16,11 @@ ipad pro 4세대 + apple pencil 2세대 + ipad magic keyboard 를 구매 했다.
 
 tmux 를 이용해서 화면을 분할하고 vim plugin 으로 syntax highlight 와 tree 메뉴를 적용 해봤다.
 
+![](https://drive.google.com/uc?export=download&id=144Y4uvYRDefY4Z67R0Miy4V4jaMcQyMm)
+
+제법 쓸만 해졌다.  
+이제 남은건 내가 vim 에 익숙 해지는것??  
+
 # 설치 및 세팅
 
 미리 관련 설정을 정리 해놓은 프로젝트를 다운받아 설치 할 예정이다.  
@@ -54,8 +59,6 @@ vi -> :GoInstallBinaries
 ```
 
 # 사용방법
-
-![](https://drive.google.com/uc?export=download&id=144Y4uvYRDefY4Z67R0Miy4V4jaMcQyMm)
 
 ## tmux command
 
