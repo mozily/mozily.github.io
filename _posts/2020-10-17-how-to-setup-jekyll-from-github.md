@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: github 에서 jekyll 를 이용해 blog 만들기 (작성중)
+title: github 에서 jekyll 를 이용해 blog 만들기 (초안)
 tags: jekyll
 ---
 
@@ -105,12 +105,33 @@ github topics 에서 jekyll-theme 태그를 검색하면 여러가지 적용 가
 ![](https://drive.google.com/uc?export=download&id=1B7Z8LAI2Pgj37o5_wRWSwiDcCZi-wU1w)
 
 테마 repository 에 접속해서 demo 사이트나 스크린샷 이미지를 보며 사용할 테마를 결정한다.  
-테마 적용 방법은 크게 2가지로 나뉠수 있다.  
+테마 적용 방법은 크게 2가지로 나뉜다.    
 1. _config.yml 파일만 복사해서 remote_theme 기능을 사용 하는 방법  
 2. 테마 repository 를 fork 해서 사용 하는 방법
-> 나는 기존 테마에서 다양한 커스터마이징을 하기 위해서 fork 해서 사용하는걸 추천 한다.
+> 기존 테마에서 다양한 커스터마이징을 하기 위해서 fork 해서 사용하는걸 추천 한다.
 
-### remote_theme 기능을 이용한 테마 적용
+### remote_theme 기능을 이용한 테마 적용 방법
 
-### repository fork 를 이용한 테마 적용
+현재 가장 star 가 많은 테마인 minimal-mistakes 로 예시를 들어 보겠다.  
+[https://github.com/mmistakes/minimal-mistakes](https://github.com/mmistakes/minimal-mistakes)
+
+적용 하고자 하는 테마의 _config.yml, index.html 파일을 내 repository 에 복사 한다.    
+
+![](https://drive.google.com/uc?export=download&id=1ws3ZLpojbN-HxRzeKuYhU4d2ycNaIz5c)
+
+복사한 _config.yml 내용에 아래의 코드를 추가 한다. (코드가 주석 상태라면 주석 해제)  
+> remote_theme : mmistakes/minimal-mistakes  
+
+복사한 _config.yml 내용중 아래의 코드를 수정 한다.  
+> url : "https://본인id.github.io"  
+> baseurl : ""  
+
+### repository fork 를 이용한 테마 적용 방법
+
+![](https://drive.google.com/uc?export=download&id=1jh21IX0aFeOnPqMBfoR7ilO_ZmRe2Snv)
+
+minimal-mistakes repository 로 가서 fork 내 저장소로 복사 해 온다.  
+
+![](https://drive.google.com/uc?export=download&id=1F0EBWhlmB_VYQrA2Yt37OHKlJkUWrmy7)
+
 
