@@ -1,94 +1,58 @@
 ---
 layout: page
 title: Tags
-no_toc: true
+permalink: /tags/
 ---
 
-{% assign page_tags = "" | split: ',' %}
-{% assign post_tags = "" | split: ',' %}
-{% assign all_tags = "" | split: ',' %}
+{% if site.posts.size == 0 %}
+<h2>No post found</h2>
+{% endif %}
 
-{% comment %}
-# get all post tags
-{% endcomment %}
+포스트 표시
 
+{% for post in site.posts %}
+<h3>{{ post.title }}</h3>
+{% endfor %}
 
-{% capture post_tags %}
+카테고리 표시
+
+<h2>{{ site.categories.size }}</h2>
+
 {% for tag in site.tags %}
-{{ tag[0] }}
-{% endfor %}
-{% endcapture %}
-{% assign tags = post_tags | strip_newlines | split:' ' %}
-
-{% comment %}
-# get all unique page tags
-{% endcomment %}
-
-{%- for page in site.pages -%}
-{% assign page_tags = page_tags | concat:page.tags %}
-{%- endfor -%}
-
-{%- assign post_tags = post_tags | remove: "\n" | split: " " -%}
-
-
-{% comment %}
-# debug prints
-
-post_tags
-{{post_tags | jsonify}}
-
-page_tags
-{{page_tags | jsonify}}
-
-{% endcomment %}
-
-{% comment %}
-# concat was injecting line breaks here, so had to hammer
-# it the old fashioned way to avoid concat
-{% endcomment %}
-
-{% for tag in post_tags %}
-{% assign all_tags = all_tags | push: tag %}
+<h3>{{tag}}</h3><br>
 {% endfor %}
 
-{% for tag in page_tags %}
-{% assign all_tags = all_tags | push: tag %}
-{% endfor %}
+<div class="tags">
+    <ul class="label">
+        {% for tag in site.tags %}
+        <li>
+            <a href="#{{ tag[0] }}">
+                <span>{{ tag[0] }}</span>
+                <span class="count">{{ tag[1] | size }}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
 
-{% assign sortedtags = all_tags | uniq | sort%}
-
-{% for tag in sortedtags %}
-{% assign all_tagged = "" | split: ',' %}
-
-<h3 id="{{ tag }}">{{ tag }}</h3>
-<ul>
-
-    {% comment %}
-    # combine posts and pages with this tag
-    {% endcomment %}
-
-    {% for post in site.tags[tag]%}
-    {% assign all_tagged = all_tagged | push: post %}
+    {% for tag in site.tags %}
+    <h2 id="{{ tag[0] }}">
+        {{ tag[0] }}
+    </h2>
+    <ul class="tag">
+        {% for post in tag[1] %}
+        {% if post.title != null %}
+        <li>
+            {% if post.link %}
+            <a href="{{ post.link }}">
+                {% else %}
+                <a href="{{ site.baseurl }}{{ post.url }}">
+                    {% endif %}
+                    {{ post.title }}
+                </a>
+                <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
     {% endfor %}
-
-    {% for page in site.pages %}
-    {% if page.tags contains tag %}
-    {% assign all_tagged = all_tagged | push: page %}
-    {% endif %}
-    {% endfor %}
-
-    {% comment %}
-    # sort by title
-    {% endcomment %}
-    {% assign all_tagged = all_tagged | sort: "title" %}
-
-
-    {% comment %}
-    # finally, print the list item!
-    {% endcomment %}
-    {% for tagged in all_tagged %}
-    <li><a href="{{ tagged.url }}">{{ tagged.title }}</a></li>
-    {% endfor %}
-
-</ul>
-{% endfor %}
+</div>
