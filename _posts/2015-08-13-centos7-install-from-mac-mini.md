@@ -7,7 +7,7 @@ tags: [linux, centos, mac-mini]
 
 ### Introduction
 
-<img src='https://drive.google.com/uc?export=download&id=1iBsFoV-oI20eyg4ce6IFqu_drBmgTbE_' alt='mac mini server 2012 late'>
+![](https://drive.google.com/uc?export=download&id=1iBsFoV-oI20eyg4ce6IFqu_drBmgTbE_)
 
 2012년 가을쯤 mac mini server 2012 late 버전을 구입 했다.
 > i7-3세대, 2.3GHz, 쿼드코어  
@@ -37,7 +37,7 @@ mac mini 에서 ssd 가 1개 (1TB) 더 추가 돼 있고, OS X Server 가 기본
 
 <font color='red'>centos 7.6.1810 minimal 버전 설치 불가</font>  
 > 2019년 7월 기준 버그로 인해 설치용 USB 를 만들경우 에러가 발생함  
-> https://angrysysadmins.tech/index.php/2018/12/grassyloki/centos-7-failed-set-moklistrt/
+> [https://angrysysadmins.tech/index.php/2018/12/grassyloki/centos-7-failed-set-moklistrt](https://angrysysadmins.tech/index.php/2018/12/grassyloki/centos-7-failed-set-moklistrt)
 
 <font color='blue'>centos 7.8.2003 minimal 설치 가능</font><br>
   
