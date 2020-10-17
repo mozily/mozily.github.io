@@ -16,6 +16,12 @@ permalink: /tags/
 
 태그 표시
 
+{% capture post_tags %}
+    {% for tag in site.tags %}
+        {{ tag[0] }}
+    {% endfor %}
+{% endcapture %}
+
 <h2>{{ site.tags.size }}</h2>
 
 {% for tag in site.tags %}
