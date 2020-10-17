@@ -19,9 +19,8 @@
 
 
 .disqus {
-  border-style: solid;
-  padding-left: $base-spacing-unit;
-  padding-right: $base-spacing-unit;
+  padding-left: double($base-spacing-unit);
+  padding-right: double($base-spacing-unit);
   width:100%;
   margin-top:20px;
   padding-top: 20px;
