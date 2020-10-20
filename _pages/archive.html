@@ -3,3 +3,29 @@ layout: page
 title: Archive
 permalink: /archive/
 ---
+
+<div id="archives"></div>
+{% assign year = "" %}
+{% for post in site.posts %}
+    {% capture post_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+    {% if year != post_year %}
+        {% capture year %}{{ post.date | date: "%Y" }}{% endcapture %}
+        <section class="c-archive--time-section">
+            <h1 class="c-archive section-year">
+                {{ year }}
+            </h1>
+            <div class="c-archive section-list">
+            {% for sub_post in site.posts %}
+                {% capture sub_year %}{{ sub_post.date | date: "%Y" }}{% endcapture %}
+                {% if year == sub_year %}
+                <div class="c-archive section-list-item">
+                    <a href="{{ site.baseurl }}{{ sub_post.url }}" class="archive-title">{{ sub_post.title }}</a>
+                    <p class="archive-date">{{ sub_post.date | date: "%m-%d" }}</p>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </section>
+        <br>
+    {% endif %}
+{% endfor %}
