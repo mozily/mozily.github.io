@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: github 에서 jekyll 를 이용해 blog 만들기
+title: Github 에서 Jekyll 를 이용해 블로그 만들기
 tags: [jekyll]
 ---
 
