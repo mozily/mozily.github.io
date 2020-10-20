@@ -25,7 +25,7 @@ local 에서 build 하고 작성한 포스트와 변경한 레이아웃 등을 �
 git clone https://github.com/{userid}.github.io
 ```   
 
-## docker 를 이용한 jekyll build
+## docker 를 이용한 jekyll 블로그 build
 
 ```bash
 docker run --rm --volume="$PWD:/srv/jekyll" -e TZ=Asia/Seoul -it jekyll/jekyll:4 jekyll build --drafts
