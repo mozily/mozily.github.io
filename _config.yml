@@ -15,7 +15,6 @@ twitter:     ''
 github:      'https://github.com/mozily'
 instagram:   ''
 facebook:    ''
-images: /images/
 
 markdown:  kramdown
 permalink: pretty
@@ -35,10 +34,5 @@ exclude:
   - vendor
   - Gemfile
   - Gemfile.lock
-
-# Pages path
-defaults:
-  - scope:
-      path: '_pages'
-    values:
-      permalink: /:basename:output_ext
+  - server.sh
+  - build.sh
