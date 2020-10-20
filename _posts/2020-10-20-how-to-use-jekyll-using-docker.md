@@ -7,19 +7,19 @@ tags: [jekyll, docker]
 
 # Introduction
 
-지난 "[Github 에서 Jekyll 를 이용해 블로그 만들기]({% post_url 2020-10-17-how-to-setup-jekyll-from-github %})" 포스트에서 jekyll 를 이용한 github page 를 만들어 봤다.    
+지난 "[Github 에서 Jekyll 를 이용해 블로그 만들기]({% post_url 2020-10-17-how-to-setup-jekyll-from-github %})" 포스트에서 jekyll 를 이용한 github pages 를 만들어 봤다.    
 
 포스팅 몇개 올려보니 아래와 같이 불편한 부분이 생겼다.  
-- local 에서 작성한 markdown 과 github page 에서 jekyll 로 build 된 페이지가 미묘하게 다르다.  
+- local 에서 작성한 markdown 과 github pages 에서 jekyll 로 build 된 페이지가 미묘하게 다르다.  
 - 만들어진 테마를 가져왔어도 수정하고 싶은 부분들이 여기저기 생긴다. (댓글, 메뉴, 레이아웃 등)  
-- 위의 사항들을 수정하고 확인하기 위해서는 github page 에 push 하고 페이지가 반영 되기 까지 약 1분 정도를 기다려야 한다.  
+- 위의 사항들을 수정하고 확인하기 위해서는 github pages 에 push 하고 페이지가 반영 되기 까지 약 1분 정도를 기다려야 한다.  
 
 이런 불편함들을 해소 하기 위해서 local 에 jekyll 을 설치 하기로 마음 먹었다.  
-local 에서 build 하고 작성한 포스트와 변경한 레이아웃 등을 확인한 뒤 최종적으로 github page 에 push 하려는 계획이다.
+local 에서 build 하고 작성한 포스트와 변경한 레이아웃 등을 확인한 뒤 최종적으로 github pages 에 push 하려는 계획이다.
 
 # 환경세팅
 
-## github page 다운로드
+## github pages 다운로드
 
 ```bash
 git clone https://github.com/{userid}.github.io
@@ -34,7 +34,7 @@ docker run --rm --volume="$PWD:/srv/jekyll" -e TZ=Asia/Seoul -it jekyll/jekyll:4
 ## .gitignore 파일 세팅
 
 gitignore 에 build 해서 나온 cache 와 _site 정보 추가  
-> local 에서는 build 된 페이지만 확인하고 github page 에서 build 하기 위함  
+> local 에서는 build 된 페이지만 확인하고 github pages 에서 build 하기 위함  
 > local 에서 빌드한 결과물을 올리고 싶다면 _site 는 gitignore 에 추가하지 말것  
 
 ```text

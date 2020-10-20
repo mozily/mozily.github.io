@@ -5,7 +5,7 @@ title: Github 에서 Jekyll 를 이용해 블로그 만들기
 tags: [jekyll]
 ---
 
-# github page 와 jekyll
+# github pages 와 jekyll
 
 ## jekyll 가 뭔가요?
 
@@ -49,10 +49,10 @@ github 는 git 을 이용하는 개발자들이 좀더 효율적으로 프로젝
 
 ![](https://drive.google.com/uc?export=download&id=1UbGGIZQotOp1Pw8BgUCQOOBNlR0798Qj)
 
-github page 는 github 에서 제공 하는 정적 페이지 호스팅 서비스 이다.  
+github pages 는 github 에서 제공 하는 정적 페이지 호스팅 서비스 이다.  
 > html, jekyll 등을 지원 한다.  
 
-github page 는 jekyll 을 내부 엔진으로 사용하고 있지만 여러가지 보안상의 이유로 jekyll plugin 은 사용할수 없다.  
+github pages 는 jekyll 을 내부 엔진으로 사용하고 있지만 여러가지 보안상의 이유로 jekyll plugin 은 사용할수 없다.  
 만약 plugin 을 사용하고 싶다면 로컬 환경에 jekyll 를 세팅하고 plugin 을 설치 한후  
 build 로 생성한 파일을 직접 push 하는 방식으로 사용 할 수 있다.  
 
@@ -82,15 +82,15 @@ github 에서는 2020년 10월을 기점으로 default branch name 을 master �
 1. github 정책에 따라 main branch 를 그대로 유지하고, source 부분의 branch 를 main 으로 변경한다.    
 2. source 부분의 branch 를 master 로 그대로 유지하고, master branch 를 생성한다.  
 
-### github page 의 제약사항
+### github pages 의 제약사항
 
 [github page usage limits document](https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/about-github-pages#usage-limits)
 
-github page 는 일반적인 유저라면 쉽게 걸리지 않는 제약사항을 가지고 있다.  
-1. github page 의 repository 는 1GB 를 초과 할 수 없다.  
-2. github page 사이트는 1GB 를 초과 할 수 없다.  
-3. github page 는 월 기준 100GB 의 트래픽을 넘길수 없다.  
-4. github page 는 1시간에 10번 까지만 build 할 수 있다.  
+github pages 는 일반적인 유저라면 쉽게 걸리지 않는 제약사항을 가지고 있다.  
+1. github pages 의 repository 는 1GB 를 초과 할 수 없다.  
+2. github pages 사이트는 1GB 를 초과 할 수 없다.  
+3. github pages 는 월 기준 100GB 의 트래픽을 넘길수 없다.  
+4. github pages 는 1시간에 10번 까지만 build 할 수 있다.  
 
 위의 제약이 싫다면 github premium 을 쓰면 되지만 일반적인 블로그 운영이라면 제약사항을 초과하기는 힘들 것 같다.  
 
@@ -136,7 +136,7 @@ Repository name 을 본인id.github.io 로 변경한다.
 변경 후 _config.yml 에서 기호에 맞게 정보를 수정한다.  
 > 이때 remote_theme 는 그대로 주석처리 해두면 된다.
 
-# github page 에 포스팅 하기
+# github pages 에 포스팅 하기
 
 ## 작성방법
 
@@ -162,6 +162,6 @@ jekyll build --drafts
 위처럼 --drafts 옵션을 넣어서 빌드하면 build 하는 날짜가 초안의 앞에 자동으로 붙어서 페이지가 생성 된다.  
 초안 작업이 완료되면 포스트 파일앞에 날짜를 추가 하고 _posts 디렉토리로 옮기면 된다.  
 
-기본적으로 github page 에서는 github page 의 source 로 설정된 branch 에 push 가 새롭게 되면  
+기본적으로 github pages 에서는 github page 의 source 로 설정된 branch 에 push 가 새롭게 되면  
 자동으로 build 를 하고 github.io 에 생성한 정적 페이지를 배포 한다.  
 push 하고 나서 약 1분 정도의 시간이 소요 될수 있으니 여유를 가지고 기다려 보자.  
