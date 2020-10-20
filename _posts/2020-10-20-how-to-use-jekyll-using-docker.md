@@ -22,7 +22,7 @@ local 에서 build 하고 작성한 포스트와 변경한 레이아웃 등을 �
 ## github page 다운로드
 
 ```bash
-git clone https://github.com/{userid}
+git clone https://github.com/{userid}.github.io
 ```   
 
 ## docker 를 이용한 jekyll build
