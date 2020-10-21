@@ -2,20 +2,12 @@
   Components > Archive
 \*------------------------------------*/
 
-//#archives:before {
-//  position: absolute;
-//  top: 120px;
-//  bottom: 100px;
-//  left: 30px;
-//  height: 100%;
-//  content: '';
-//  background-color: #000000;
-//  width: 4px;
-//}
+#archives-layout {
+  position: relative;
+}
 
 #archives {
   position: absolute;
-  top: 120px;
   height: 100%;
   width: 4px;
   margin-left: 14px;
