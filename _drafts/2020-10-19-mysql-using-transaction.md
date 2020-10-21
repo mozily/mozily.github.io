@@ -1,46 +1,92 @@
 ---
 layout: post  
 comments: true    
-title: mysql 에서 transaction 사용하기
+title: mysql 의 transaction, isolation level
 tags: [mysql, transaction]
 ---  
 
-# Transaction
+## Transaction
 
-데이터의 상태를 변화 시키기 위한 작업의 단위를 말한다.  
+transaction 은 데이터의 상태를 변화 시키기 위한 작업의 단위를 말한다.  
 가장 적절한 transaction 에 대한 설명은 "은행업무" 케이스 인것 같다.   
 
 A 가 B 에게 10만원을 입금하는 상황  
-- A 의 계좌에 -10만원
-  - UPDATE BANKBOOK SET money = money - 100000 WHERE user = A
-- B 의 계좌에 +10만원
-  - UPDATE BANKBOOK SET money = money + 100000 WHERE user = B
 
-위의 2가지의 작업이 하나의 transaction 으로 묶여 있다고 보면 된다.  
+```
+# A 의 계좌에 -10만원
+UPDATE BANKBOOK SET money = money - 100000 WHERE user = A;
+
+# B 의 계좌에 +10만원
+UPDATE BANKBOOK SET money = money + 100000 WHERE user = B;
+```
+
+위의 2가지의 작업은 하나의 transaction 으로 묶어서 처리 할 수 있다.  
+
+---  
 
 ## ACID
 
 ACID 란 안전한 데이터 처리를 위한 transaction 의 성질을 말하며, 각각의 앞 글자를 따서 ACID 라고 부른다.  
-- **Atomicity (원자성)**
-  - transaction 을 완전히 수행하거나, 혹은 하나도 실행되지 않음을 말한다.  
-  - A 계좌에서는 -10만원이 됐는데 B 계좌에서는 +10만원이 안된다면 원자성에 위배 되는 것이다.  
-- **Consistency (일관성)**
-  - transaction 작업이 성공적으로 수행 됐다면 언제나 일관성 있는 DB의 상태로 유지 되어야 한다.  
-- **Isolation (독립성)**
-  - transaction 작업이 수행되는 동안에 다른 transaction 의 작업이 끼어들지 못하게 보장 하는 것이다.  
-- **Durability (지속성)**
-  - transaction 작업이 성공적으로 수행 됐다면 해당 데이터는 영원히 반영 되어야 한다.  
+
+**Atomicity (원자성)**  
+transaction 을 완전히 수행 하거나, 혹은 하나도 실행되지 않음을 말한다. (모아니면 도)    
+A 계좌에서는 -10만원이 됐는데 B 계좌에서는 +10만원이 안됐다면 원자성에 위배 되는 것이다.  
+
+**Consistency (일관성)**  
+transaction 작업이 성공적으로 수행 됐다면 언제나 일관성 있는 DB의 상태로 유지 되어야 한다.  
+말이 너무 어려울수 있는데 transaction 작업이 끝나도 필드타입이나 제한 사항들이 그대로 유지 돼야 한다는 것이다.  
+
+**Isolation (독립성)**  
+transaction 작업이 수행되는 동안에 다른 transaction 의 작업이 끼어들지 못하게 보장 하는 것이다.  
+
+**Durability (지속성)**  
+transaction 작업이 성공적으로 수행 됐다면 해당 데이터는 영원히 반영 되어야 한다.  
+
+---
 
 ## Isolation level
 
-동시에 여러 transaction 이 실행 될때 각각의 transaction 서로 어느정도 수준으로 격리 돼 있는지를 나타낸다.    
+isolation level 이란 동시에 여러 transaction 이 실행 될때 각각의 transaction 서로 어느정도 수준으로 격리 돼 있는지를 나타낸다.  
+본격적으로 isolation level 에 대해서 보기 전에 먼저 동시성 문제에 따른 read 트러블 유형에 대해서 알아 보자  
 
-|isolation level|lock|description|
-|--|--|
-|READ UNCOMMITTED|X|1) commit 되지 않은 트렌젝션 접근 가능<br>2) insert, update, delete 후 commit 이나 rollback 에 상관없이 현재의 데이터를 읽어온다.<br>3) rollback이 될 데이터도 읽어올 수 있으므로 (dirty read) 주의가 필요<br>4) LOCK 이 발생하지 않는다.|
-|READ COMMITTED|X| |
-|REPEATABLE READ|record lock, gap lock| |
-|SERIALIZABLE|shared lock| |
+**dirty read**  
+![그림으로 넣자]()
+T1이 변경한 데이터가 아직 캐시에만 반영 됐고 commit 되지 않은 상태에서 T2 가 해당 데이터를 읽는 행위  
+이때 T1이 데이터를 다시 롤백하면 T2가 읽은 데이터는 잘못된 데이터가 된다.  
+
+**unrepeatable read**
+![그림으로 넣자]()
+T1이 데이터를 읽었는데 T2가 해당 데이터를 변경 또는 삭제 하고 commit 했다.  
+이때 다시 T1이 해당 데이터를 읽으면 이전에 읽었던 데이터와 다시 읽은 데이터가 서로 다른 데이터가 된다.  
+
+**phantom read**
+![그림으로 넣자]()
+T1이 특정 조건으로 데이터를 읽었다. T2는 T1이 검색한 조건중 일부 데이터를 추가 또는 삭제 했다.  
+이때 다시 T1이 같은 조건으로 데이터를 읽는 다면 이전에 읽었던 데이터는 추가 또는 삭제 됐을 것 이다.  
+여기서 다시 T2가 작업 내용을 commit 하지 않고 rollback 한다면 T1은 존재하지 않는 데이터를 읽게 된 것이다.  
+
+**READ UNCOMMITTED**
+- 다른 transaction 이 commit 되지 않은 데이터에 접근 가능
+- insert, update, delete 후 commit 이나 rollback 에 상관없이 현재의 데이터를 읽어온다.
+- dirty read 가 발생할 수 있으니 주의가 필요  
+  - 다른 transaction 이 데이터를 읽었는데 해당 데이터가 rollback 되는 경우  
+- lock 이 발생하지 않는다.
+
+**READ COMMITTED**
+- 다른 transaction 은 commit 된 데이터에만 접근 가능
+- 
+ - 다른 transaction 이 데이터를 읽고 난 뒤에 해당 데이터가 commit 되는 경우
+- lock 이 발생하지 않는다.
+
+**REPEATABLE READ**
+- mysql innoDB storage engine 의 default isolation level  
+- dirty read 가 발생하지 않는다 
+- record lock, gap lock 발생
+
+**SERIALIZABLE**
+- shared lock
+  
+---
 
 ### mysql 의 isolation 확인
 
