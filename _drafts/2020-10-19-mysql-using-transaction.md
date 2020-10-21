@@ -3,22 +3,37 @@ layout: post
 comments: true    
 title: mysql 에서 transaction 사용하기
 tags: [mysql, transaction]
----
+---  
 
-## Introduction
+# Transaction
 
-mssql 에서 mysql 로 database 를 변경하고 나서 transaction 을 사용하지 않는 개발 방법을 선호 했었다.
+데이터의 상태를 변화 시키기 위한 작업의 단위를 말한다.  
+가장 적절한 transaction 에 대한 설명은 "은행업무" 케이스 인것 같다.   
 
-## Transaction
+A 가 B 에게 10만원을 입금하는 상황  
+- A 의 계좌에 -10만원
+  - UPDATE BANKBOOK SET money = money - 100000 WHERE user = A
+- B 의 계좌에 +10만원
+  - UPDATE BANKBOOK SET money = money + 100000 WHERE user = B
+
+위의 2가지의 작업이 하나의 transaction 으로 묶여 있다고 보면 된다.  
 
 ## ACID
 
-- atomicity
-- consistency
-- isolation
-- durability
+ACID 란 안전한 데이터 처리를 위한 transaction 의 성질을 말하며, 각각의 앞 글자를 따서 ACID 라고 부른다.  
+- **Atomicity (원자성)**
+  - transaction 을 완전히 수행하거나, 혹은 하나도 실행되지 않음을 말한다.  
+  - A 계좌에서는 -10만원이 됐는데 B 계좌에서는 +10만원이 안된다면 원자성에 위배 되는 것이다.  
+- **Consistency (일관성)**
+  - transaction 작업이 성공적으로 수행 됐다면 언제나 일관성 있는 DB의 상태로 유지 되어야 한다.  
+- **Isolation (독립성)**
+  - transaction 작업이 수행되는 동안에 다른 transaction 의 작업이 끼어들지 못하게 보장 하는 것이다.  
+- **Durability (지속성)**
+  - transaction 작업이 성공적으로 수행 됐다면 해당 데이터는 영원히 반영 되어야 한다.  
 
 ## Isolation level
+
+동시에 여러 transaction 이 실행 될때 각각의 transaction 서로 어느정도 수준으로 격리 돼 있는지를 나타낸다.    
 
 |isolation level|lock|description|
 |--|--|
@@ -228,3 +243,6 @@ mysql> SELECT * FROM information_schema.INNODB_LOCK_WAITS;
 # lock을 건 정보
 mysql> SELECT * FROM information_schema.INNODB_LOCKS;
 ```
+
+# 참고자료
+- https://ko.wikipedia.org/wiki/ACID
