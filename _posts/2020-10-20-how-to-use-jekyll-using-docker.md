@@ -70,10 +70,12 @@ Configuration file: /srv/jekyll/_config.yml
 server address 를 보면 http://0.0.0.0:4000 으로 접근 가능하다고 나온다.  
 http://localhost:4000 으로 접속해서 페이지를 확인 하자.  
 
-서버가 올라가 있는 상태에서는 코드를 수정하면 바로바로 페이지에 반영 된다.  
-
+리눅스 파일 시스템에서 jekyll 서버를 실행 할 경우 변경 된 사항이 위의 로그 처럼 바로 반영 된다.
 ```text
 Regenerating: 1 file(s) changed at 2020-10-20 13:57:07
             _drafts/2020-10-20-how-to-use-jekyll-using-docker.md
             ...done in 0.8102454 seconds.
 ```
+
+윈도우 파일 시스템에서는 위에 설명에도 나와 있듯이 변경 된 사항이 자동으로 반영 되지 않는다.  
+jekyll 서버를 다시 실행 해야 변경 된 사항이 반영 된다.  
