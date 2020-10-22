@@ -15,7 +15,8 @@ div.highlight{
 
 pre.highlight {
   overflow-x: auto;
-  padding: double($base-spacing-unit);
+  //padding: double($base-spacing-unit);
+  padding: 10px;
   font-size: $font-size-medium;
   line-height: $line-height-medium;
   white-space: pre;

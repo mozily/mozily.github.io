@@ -13,11 +13,17 @@ transaction 은 데이터의 상태를 변화 시키기 위한 작업의 단위�
 A 가 B 에게 10만원을 입금하는 상황  
 
 ```
+# transaction 시작
+mysql> START TRANSACTION;
+
 # A 의 계좌에 -10만원
-UPDATE BANKBOOK SET money = money - 100000 WHERE user = A;
+mysql> UPDATE BANKBOOK SET money = money - 100000 WHERE user = 'A';
 
 # B 의 계좌에 +10만원
-UPDATE BANKBOOK SET money = money + 100000 WHERE user = B;
+mysql> UPDATE BANKBOOK SET money = money + 100000 WHERE user = 'B';
+
+# 작업한 transaction 을 적용
+mysql> COMMIT;
 ```
 
 위의 2가지의 작업은 하나의 transaction 으로 묶어서 처리 할 수 있다.  
@@ -47,48 +53,7 @@ transaction 작업이 성공적으로 수행 됐다면 해당 데이터는 영�
 ## Isolation level
 
 isolation level 이란 동시에 여러 transaction 이 실행 될때 각각의 transaction 서로 어느정도 수준으로 격리 돼 있는지를 나타낸다.  
-본격적으로 isolation level 에 대해서 보기 전에 먼저 동시성 문제에 따른 read 트러블 유형에 대해서 알아 보자  
-
-**dirty read**  
-![그림으로 넣자]()
-T1이 변경한 데이터가 아직 캐시에만 반영 됐고 commit 되지 않은 상태에서 T2 가 해당 데이터를 읽는 행위  
-이때 T1이 데이터를 다시 롤백하면 T2가 읽은 데이터는 잘못된 데이터가 된다.  
-
-**unrepeatable read**
-![그림으로 넣자]()
-T1이 데이터를 읽었는데 T2가 해당 데이터를 변경 또는 삭제 하고 commit 했다.  
-이때 다시 T1이 해당 데이터를 읽으면 이전에 읽었던 데이터와 다시 읽은 데이터가 서로 다른 데이터가 된다.  
-
-**phantom read**
-![그림으로 넣자]()
-T1이 특정 조건으로 데이터를 읽었다. T2는 T1이 검색한 조건중 일부 데이터를 추가 또는 삭제 했다.  
-이때 다시 T1이 같은 조건으로 데이터를 읽는 다면 이전에 읽었던 데이터는 추가 또는 삭제 됐을 것 이다.  
-여기서 다시 T2가 작업 내용을 commit 하지 않고 rollback 한다면 T1은 존재하지 않는 데이터를 읽게 된 것이다.  
-
-**READ UNCOMMITTED**
-- 다른 transaction 이 commit 되지 않은 데이터에 접근 가능
-- insert, update, delete 후 commit 이나 rollback 에 상관없이 현재의 데이터를 읽어온다.
-- dirty read 가 발생할 수 있으니 주의가 필요  
-  - 다른 transaction 이 데이터를 읽었는데 해당 데이터가 rollback 되는 경우  
-- lock 이 발생하지 않는다.
-
-**READ COMMITTED**
-- 다른 transaction 은 commit 된 데이터에만 접근 가능
-- 
- - 다른 transaction 이 데이터를 읽고 난 뒤에 해당 데이터가 commit 되는 경우
-- lock 이 발생하지 않는다.
-
-**REPEATABLE READ**
-- mysql innoDB storage engine 의 default isolation level  
-- dirty read 가 발생하지 않는다 
-- record lock, gap lock 발생
-
-**SERIALIZABLE**
-- shared lock
-  
----
-
-### mysql 의 isolation 확인
+mysql 의 default isolation level 은 REPEATABLE READ 이다.  
 
 ```
 mysql> SHOW VARIABLES WHERE VARIABLE_NAME='tx_isolation';
@@ -100,9 +65,188 @@ mysql> SHOW VARIABLES WHERE VARIABLE_NAME='tx_isolation';
 1 row in set (0.01 sec)
 ```
 
+**READ UNCOMMITTED**  
+
+```
+mysql> SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+mysql> SHOW VARIABLES WHERE VARIABLE_NAME='tx_isolation';
++---------------+------------------+
+| Variable_name | Value            |
++---------------+------------------+
+| tx_isolation  | READ-UNCOMMITTED |
++---------------+------------------+
+1 row in set (0.00 sec)
+```
+
+다른 transaction 이 commit 되지 않은 데이터에 접근 가능  
+dirty read, non-repeatable read, phantom read 발생  
+lock 이 발생하지 않는다.  
+
+**READ COMMITTED**  
+
+```
+mysql> SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
+mysql> SHOW VARIABLES WHERE VARIABLE_NAME='tx_isolation';
++---------------+----------------+
+| Variable_name | Value          |
++---------------+----------------+
+| tx_isolation  | READ-COMMITTED |
++---------------+----------------+
+1 row in set (0.00 sec)
+```
+
+다른 transaction 은 commit 된 데이터에만 접근 가능  
+non-repeatable read, phantom read 발생  
+lock 이 발생하지 않는다.  
+
+**REPEATABLE READ**  
+
+```
+mysql> SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+mysql> SHOW VARIABLES WHERE VARIABLE_NAME='tx_isolation';
++---------------+-----------------+
+| Variable_name | Value           |
++---------------+-----------------+
+| tx_isolation  | REPEATABLE-READ |
++---------------+-----------------+
+1 row in set (0.00 sec)
+```
+
+mysql innoDB storage engine 의 default isolation level  
+phantom read 발생  
+record lock, gap lock 발생  
+
+**SERIALIZABLE**  
+
+```
+mysql> SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+mysql> SHOW VARIABLES WHERE VARIABLE_NAME='tx_isolation';
++---------------+--------------+
+| Variable_name | Value        |
++---------------+--------------+
+| tx_isolation  | SERIALIZABLE |
++---------------+--------------+
+1 row in set (0.00 sec)
+```
+
+최고수준의 격리 단계 이지만 성능은 좋지 않다.  
+read 트러블이 발생하지 않음  
+shared lock 발생
+
+## Isolation level 에 따른 read 트러블  
+
+**DIRTY READ**  
+
+```
++-----+------+--------+
+| idx | user | money  |
++-----+------+--------+
+|   1 | A    | 100000 |
+|   2 | B    |      0 |
++-----+------+--------+
+
+# T1
+mysql> START TRANSACTION;
+mysql> UPDATE BANKBOOK SET money = money + 100000 WHERE user = 'A';
+
+# T2
+mysql> SELECT * FROM BANKBOOK WHERE user = 'A';
++-----+------+--------+
+| idx | user | money  |
++-----+------+--------+
+|   1 | A    | 200000 |
+|   2 | B    |      0 |
++-----+------+--------+
+2 rows in set (0.00 sec)
+```
+
+T1 이 transaction 을 걸고 데이터를 변경 하고 있다.  
+변경한 데이터들은 아직 commit 되지 않아서 캐시 에만 반영 돼 있다.  
+이 상태에서 commit 되지 않은 데이터를 읽는 것을 dirty read 라고 한다.  
+
+**NON-REPEATABLE READ**
+
+```
++-----+------+--------+
+| idx | user | money  |
++-----+------+--------+
+|   1 | A    | 100000 |
+|   2 | B    |      0 |
++-----+------+--------+
+
+# T1
+mysql> START TRANSACTION;
+mysql> SELECT * FROM BANKBOOK;
++-----+------+--------+
+| idx | user | money  |
++-----+------+--------+
+|   1 | A    | 100000 |
+|   2 | B    |      0 |
++-----+------+--------+
+2 rows in set (0.00 sec)
+
+# T2
+mysql> START TRANSACTION;
+mysql> UPDATE BANKBOOK SET money = money + 100000 WHERE user = 'A';
+mysql> COMMIT;
+
+# T1
+mysql> SELECT * FROM BANKBOOK;
++-----+------+--------+
+| idx | user | money  |
++-----+------+--------+
+|   1 | A    | 200000 |
+|   2 | B    |      0 |
++-----+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> 
+```
+
+T1 이 데이터를 읽었는데 T2 가 해당 데이터를 변경하고 commit 했다.  
+이때 다시 T1 이 해당 데이터를 읽으면 이전에 읽었던 데이터와 다시 읽은 데이터가 달라진다.  
+위처럼 하나의 transaction 안에서 반복적으로 동일한 데이터를 조회 할때  
+데이터가 달라지는 것을 non-repeatable read 라고 한다.  
+
+**PHANTOM READ**
+
+```
++-----+------+--------+
+| idx | user | money  |
++-----+------+--------+
+|   1 | A    | 100000 |
+|   2 | B    |      0 |
++-----+------+--------+
+
+# T1
+mysql> START TRANSACTION;
+mysql> INSERT INTO BANKBOOK(user, money) VALUES('C', 200000);
+
+# T2
+mysql> START TRANSACTION;
+mysql> SELECT * FROM BANKBOOK;
++-----+------+--------+
+| idx | user | money  |
++-----+------+--------+
+|   1 | A    | 100000 |
+|   2 | B    |      0 |
+|   3 | C    | 200000 | 
++-----+------+--------+
+
+# T1
+mysql> ROLLBACK;
+```
+
+T1 이 transaction 상태에서 데이터를 추가 했다. (C를 추가 함)  
+T2 가 데이터를 읽었다. (이때는 C가 존재함)  
+T1 이 transaction 을 롤백 했다.  
+T2 입장에서는 C 의 데이터에 대해서 phantom read 가 된것이다.    
+  
+---
+
 ## mysql engine
 
-mysql 은 테이블별로 engine 을 설정할수 있다, x버전 이후 default 는 innoDB 이다.  
+mysql 은 테이블별로 engine 을 설정할수 있다, default 는 innoDB 이다.  
 
 ```
 mysql> SHOW CREATE TABLE TB_TEST \G
@@ -118,25 +262,25 @@ Create Table: CREATE TABLE `TB_TEST` (
 1 row in set (0.00 sec)
 ```
 
-### myisam
+대표적으로 사용하는 2개의 engine 에 대해서만 비교 해보자.  
 
+**MyISAM**  
+mysql 5.5,4 까지 default engine  
 transaction 미지원  
 
-### innodb
-
+**InnoDB**  
+mysql 5.5.5 부터 default engine  
 transaction 지원  
 row lock 사용
 
-read lock : shared lock
-write lock : exclusive lock
+read lock : shared lock  
+write lock : exclusive lock  
 
 read 끼리의 경쟁은 하지 않지만, write 에 대한 경쟁은 제한
 read, read : 경쟁 x
 read, write : 경쟁
 write, read : 경쟁
 write, write : 경쟁
-
-default isolation level 은 REPEATABLE  
 
 ## locking select
 
@@ -145,7 +289,7 @@ transaction 이 끝나기 전까지만 lock 이 유효하기 때문에 locking s
 ### AUTO COMMIT 이란?
 
 DML 을 이용한 데이터 변경 작업을 즉시 반영하는 상태를 말한다.  
-AUTO COMMIT 을 끄게 되면 commit 혹은 rollback 을 만나기 전까지 실행하는 DML 이 하나의 transaction 으로 묶인다.  
+AUTO COMMIT 을 끄게 되면 commit 혹은 rollback 을 만나기 전까지 실행하는 query 들이 하나의 transaction 으로 묶인다.  
 
 ```
 # autocommit 옵션 여부 체크
