@@ -1,6 +1,6 @@
 ---
 layout: null
-sitemap:
+sitemap :
 exclude: 'yes'
 ---
 
@@ -20,12 +20,12 @@ exclude: 'yes'
             {% if post.sitemap.changefreq %}
                 <changefreq>{{ post.sitemap.changefreq }}</changefreq>
             {% else %}
-                <changefreq>monthly</changefreq>
+                <changefreq>daily</changefreq>
             {% endif %}
             {% if post.sitemap.priority %}
                 <priority>{{ post.sitemap.priority }}</priority>
             {% else %}
-                <priority>0.5</priority>
+                <priority>1.0</priority>
             {% endif %}
         </url>
         {% endunless %}
