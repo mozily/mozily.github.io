@@ -10,7 +10,7 @@ tags: [linux, wsl2, docker]
 ![](https://drive.google.com/uc?export=download&id=182NzrhGFSpTJERth6nkkyrhgqmf66qa6)
 
 > 윈도우키 > 설정 > 시스템 > 정보 순으로 접근  
-> 제일 하단에 windows 사양 정보를 확인 (버전이 2004 이하라면 업데이트 필요)  
+> 제일 하단에 windows 사양 정보를 확인 (버전이 2004 미만 이라면 업데이트 필요)  
 
 ### WSL 설치
 

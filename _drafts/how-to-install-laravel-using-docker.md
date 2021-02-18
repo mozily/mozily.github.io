@@ -193,5 +193,6 @@ docker run -it --rm --name laravel_server -v /home/mozily/laravel:/var/www/html/
 # 참고자료
 
 - [쉽게 배우는 라라벨 5 프로그래밍](https://www.lesstif.com/laravelprog/5-28606603.html)
+- [[Laravel] 라라벨 설치하기 PHP7.0 + Nginx](https://blog.storyg.co/laravels/install-on-ubuntu16-with-php7-and-nginx)
 - [Laravel 8.X 설치하기](https://laravel.kr/docs/8.x/installation)
 - [simple laravel layouts using blade](https://scotch.io/tutorials/simple-laravel-layouts-using-blade)
